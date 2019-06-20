@@ -8,8 +8,7 @@ import { I18nextProvider } from 'react-i18next';
 import Layout from 'components/Layout';
 import withApolloClient from 'config/with-apollo-client';
 import initialI18nInstance from 'config/i18n';
-import 'styles/styles.scss';
-import 'styles/antd-styles.less';
+import 'styles/styles.less';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();

@@ -1,0 +1,97 @@
+@import 'helpers';
+
+.full-width {
+  width: 100%;
+}
+.full-height {
+  height: 100vh;
+}
+.full-height-min {
+  min-height: 100vh;
+}
+.flex-vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &.left {
+    align-items: flex-start;
+  }
+  &.right {
+    align-items: flex-end;
+  }
+}
+.flex-horizontal-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &.left {
+    align-items: flex-start;
+  }
+  &.right {
+    align-items: flex-end;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+// ============= HELPER
+// ----- Image
+.object-fit_fill {
+  object-fit: fill;
+}
+.object-fit_contain {
+  object-fit: contain;
+}
+.object-fit_cover {
+  object-fit: cover;
+}
+.object-fit_none {
+  object-fit: none;
+}
+.object-fit_scale-down {
+  object-fit: scale-down;
+}
+
+// ----- padding
+@values-array: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80;
+.make-space() {
+  .for(@values-array);
+  .-each(@value) {
+    .p@{value} {
+      padding: ~'@{value}px';
+    }
+    .pt@{value} {
+      padding-top: ~'@{value}px';
+    }
+    .pl@{value} {
+      padding-left: ~'@{value}px';
+    }
+    .pr@{value} {
+      padding-right: ~'@{value}px';
+    }
+    .pb@{value} {
+      padding-bottom: ~'@{value}px';
+    }
+    .m@{value} {
+      margin: ~'@{value}px';
+    }
+    .mt@{value} {
+      margin-top: ~'@{value}px';
+    }
+    .ml@{value} {
+      margin-left: ~'@{value}px';
+    }
+    .mr@{value} {
+      margin-right: ~'@{value}px';
+    }
+    .mb@{value} {
+      margin-bottom: ~'@{value}px';
+    }
+  }
+}
+
+.make-space();
