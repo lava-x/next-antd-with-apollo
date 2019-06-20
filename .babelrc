@@ -1,0 +1,44 @@
+{
+  "presets": [
+    [
+      "next/babel",
+      {
+        "styled-jsx": {
+          "plugins": ["styled-jsx-plugin-sass"]
+        }
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [["next/babel", { "preset-env": { "modules": "commonjs" } }]]
+    }
+  },
+  "plugins": [
+    "import-graphql",
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "cwd": "babelrc",
+          "components": "./src/components",
+          "config": "./src/config",
+          "containers": "./src/containers",
+          "graphql": "./src/graphql",
+          "locales": "./src/locales",
+          "screens": "./screens",
+          "styles": "./styles",
+          "assets": "./static/assets"
+        }
+      }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ]
+  ]
+}

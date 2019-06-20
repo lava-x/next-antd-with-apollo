@@ -1,0 +1,10 @@
+{
+  "welcome": "Willkommen zu next.js",
+  "sample_test": "Test words for de",
+  "sample_button": "Dies ist der Button",
+  "link": {
+    "gotoHome": "Zur Seite Home",
+    "gotoTodo": "Zur Seite Todo",
+    "gotoTest": "Zur Seite Test"
+  }
+}
