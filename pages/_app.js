@@ -6,6 +6,7 @@ import NProgress from 'nprogress';
 import Router, { withRouter } from 'next/router';
 import { I18nextProvider } from 'react-i18next';
 import Layout from 'components/Layout';
+import GlobalHeader from 'components/Pro/GlobalHeader';
 import withApolloClient from 'config/with-apollo-client';
 import initialI18nInstance from 'config/i18n';
 import 'styles/styles.less';
@@ -33,6 +34,7 @@ class MyApp extends App {
         </Head>
         <ApolloProvider client={apolloClient}>
           <I18nextProvider i18n={initialI18nInstance}>
+            <GlobalHeader />
             <Layout>
               <Component {...pageProps} />
             </Layout>
