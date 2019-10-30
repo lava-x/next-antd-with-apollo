@@ -1,4 +1,5 @@
-import { compose, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import { flowRight as compose } from 'lodash';
 import { queries, mutations } from 'graphql';
 import Link from 'components/Link';
 

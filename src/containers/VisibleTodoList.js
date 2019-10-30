@@ -1,6 +1,7 @@
-import { graphql, compose } from 'react-apollo';
-import TodoList from 'components/TodoList';
+import { graphql } from 'react-apollo';
+import { flowRight as compose } from 'lodash';
 import { queries, mutations } from 'graphql';
+import TodoList from 'components/TodoList';
 
 const { GET_TODOS } = queries.Todos;
 const { TOGGLE_TODO } = mutations.Todos;
