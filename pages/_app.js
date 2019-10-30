@@ -1,12 +1,11 @@
-import App, { Container } from 'next/app';
+import App from 'next/app';
 import Head from 'next/head';
-import { ApolloProvider } from 'react-apollo';
 import React from 'react';
 import NProgress from 'nprogress';
-import Router, { withRouter } from 'next/router';
+import Router from 'next/router';
 import { I18nextProvider } from 'react-i18next';
 import Layout from 'components/Layout';
-import withApolloClient from 'config/with-apollo-client';
+import withApolloClient from 'config/withApolloClient';
 import initialI18nInstance from 'config/i18n';
 import 'styles/styles.less';
 
@@ -15,32 +14,27 @@ Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 class MyApp extends App {
-  static async getInitialProps(props) {
-    const { Component, ctx, apolloClient } = props;
+  static async getInitialProps({ Component, router, ctx }) {
     let pageProps = {};
     if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps({ ctx });
+      pageProps = await Component.getInitialProps(ctx);
     }
-    return { pageProps, apolloClient };
+    return { pageProps };
   }
 
   render() {
     const { Component, pageProps, apolloClient } = this.props;
     return (
-      <Container>
+      <I18nextProvider i18n={initialI18nInstance}>
         <Head>
           <title>Lava X | NextJS with AntDesign Starter</title>
         </Head>
-        <ApolloProvider client={apolloClient}>
-          <I18nextProvider i18n={initialI18nInstance}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </I18nextProvider>
-        </ApolloProvider>
-      </Container>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </I18nextProvider>
     );
   }
 }
 
-export default withRouter(withApolloClient(MyApp));
+export default withApolloClient(MyApp);

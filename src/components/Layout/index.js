@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
 import _ from 'lodash';
+import React, { Component } from 'react';
+import { withRouter } from 'next/router';
 import Header from 'components/Layout/Header';
 import Footer from 'components/Layout/Footer';
 
@@ -38,4 +39,4 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+export default withRouter(Layout);
