@@ -1,9 +1,11 @@
 import React from 'react';
 import { graphql } from '@apollo/react-hoc';
+import { withTranslation } from 'i18next';
 import { mutations } from 'graphql';
 
+const defaultI18nNamespaceForThisComponent = 'todo';
 const { ADD_TODO } = mutations.Todos;
-const AddTodo = ({ mutate, ...rest }) => {
+const AddTodo = ({ mutate, t, ...rest }) => {
   let input;
 
   return (
@@ -26,12 +28,14 @@ const AddTodo = ({ mutate, ...rest }) => {
             }}
             className="input is-medium"
             type="text"
-            placeholder="What to do?"
+            placeholder={t(
+              `${defaultI18nNamespaceForThisComponent}:input.placeholder`
+            )}
           />
         </div>
         <div className="control ">
           <button type="submit" className="button is-primary is-medium">
-            Add
+            {t(`${defaultI18nNamespaceForThisComponent}:show.add`)}
           </button>
         </div>
       </div>
@@ -39,4 +43,12 @@ const AddTodo = ({ mutate, ...rest }) => {
   );
 };
 
-export default graphql(ADD_TODO)(AddTodo);
+AddTodo.getInitialProps = () => ({
+  namespacesRequired: ['todo', 'common'],
+});
+
+// export default withTranslation(defaultI18nNamespaceForThisComponent)(AddTodo);
+
+export default graphql(ADD_TODO)(
+  withTranslation(defaultI18nNamespaceForThisComponent)(AddTodo)
+);

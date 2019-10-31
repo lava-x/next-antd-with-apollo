@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'next/router';
 import classnames from 'classnames';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from 'i18next';
 
 class ActiveLink extends PureComponent {
   static propTypes = {

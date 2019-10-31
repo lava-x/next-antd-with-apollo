@@ -1,0 +1,12 @@
+{
+  "input": {
+    "placeholder": "Was ist zu tun"
+  },
+  "show": {
+    "label": "Anzeigen",
+    "all": "Alle",
+    "active": "Aktiv",
+    "completed": "Fertiggestellt",
+    "add": "Hinzufügen"
+  }
+}
