@@ -1,11 +1,15 @@
 import React from 'react';
 import { graphql } from '@apollo/react-hoc';
-import { withTranslation } from 'i18next';
+import { useTranslation } from 'i18next';
 import { mutations } from 'graphql';
 
 const defaultI18nNamespaceForThisComponent = 'todo';
 const { ADD_TODO } = mutations.Todos;
-const AddTodo = ({ mutate, t, ...rest }) => {
+const AddTodo = ({ mutate, ...rest }) => {
+  //
+  // useTranslation() in component level.
+  //
+  const { t } = useTranslation(defaultI18nNamespaceForThisComponent);
   let input;
 
   return (
@@ -43,12 +47,4 @@ const AddTodo = ({ mutate, t, ...rest }) => {
   );
 };
 
-AddTodo.getInitialProps = () => ({
-  namespacesRequired: ['todo', 'common'],
-});
-
-// export default withTranslation(defaultI18nNamespaceForThisComponent)(AddTodo);
-
-export default graphql(ADD_TODO)(
-  withTranslation(defaultI18nNamespaceForThisComponent)(AddTodo)
-);
+export default graphql(ADD_TODO)(AddTodo);
