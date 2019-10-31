@@ -1,23 +1,18 @@
 import React from 'react';
-import Link from 'next/link';
-import { Trans } from 'react-i18next';
-import { withI18next } from 'config/with-i18next';
-import i18n from 'config/i18n';
+import { i18n, Link, withTranslation, Trans } from 'i18n';
 import { withRouter } from 'next/router';
-import { languages } from 'locales';
 
 const Test = ({ t, router }) => (
   <div className="full-height-min pl20 pl20">
     <div className="buttons has-addons">
-      {languages.map((lang, index) => {
-        return (
-          <Link key={index} href={`${router.pathname}?lng=${lang}`}>
-            <a className="button" onClick={() => i18n.changeLanguage(lang)}>
-              {lang}
-            </a>
-          </Link>
-        );
-      })}
+      <button
+        type="button"
+        onClick={() =>
+          i18n.changeLanguage(i18n.language === 'en' ? 'de' : 'en')
+        }
+      >
+        {t('change-locale')}
+      </button>
     </div>
     <h1>{t('welcome')}</h1>
     <p>{t('common:integrates_react-i18next')}</p>
@@ -46,4 +41,8 @@ const Test = ({ t, router }) => (
   </div>
 );
 
-export default withRouter(withI18next(['translate', 'common'])(Test));
+Test.getInitialProps = async () => ({
+  namespacesRequired: ['translate', 'common'],
+});
+
+export default withRouter(withTranslation('translate-page')(Test));
