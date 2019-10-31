@@ -1,6 +1,6 @@
 # NextJs Starter
 
-> A Starter project for `nextJs` with Bulma CSS framework.
+> A Starter project for `NextJs` with Ant Design framework.
 
 ## How to run app
 
