@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 import { initApolloClient } from './initApollo';
 
 let apolloClient = null;
@@ -73,7 +73,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
           } catch (error) {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
-            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            // https://www.apollographql.com/docs/react/performance/server-side-rendering/#using-getdatafromtree
             console.error('Error while running `getDataFromTree`', error);
           }
 
