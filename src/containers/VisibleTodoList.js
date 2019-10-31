@@ -1,4 +1,4 @@
-import { graphql } from 'react-apollo';
+import { graphql } from '@apollo/react-hoc';
 import { flowRight as compose } from 'lodash';
 import { queries, mutations } from 'graphql';
 import TodoList from 'components/TodoList';

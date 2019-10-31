@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql } from 'react-apollo';
+import { graphql } from '@apollo/react-hoc';
 import { mutations } from 'graphql';
 
 const { ADD_TODO } = mutations.Todos;

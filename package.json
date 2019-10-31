@@ -11,6 +11,7 @@
     "prettier": "prettier --write '**/*.js{x,}'"
   },
   "dependencies": {
+    "@apollo/react-hoc": "^3.1.3",
     "@apollo/react-ssr": "^3.1.3",
     "@zeit/next-less": "^1.0.1",
     "antd": "^3.24.3",

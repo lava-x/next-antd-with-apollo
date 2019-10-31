@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Query } from 'react-apollo';
 import ErrorMessage from 'components/Error';
 import Posts from 'components/Posts';
 
