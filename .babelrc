@@ -29,7 +29,7 @@
           "locales": "./src/locales",
           "screens": "./src/screens",
           "styles": "./styles",
-          "assets": "./static/assets",
+          "assets": "./public/static/assets",
           "i18next": "./i18n"
         }
       }
