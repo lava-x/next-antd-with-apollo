@@ -15,11 +15,13 @@ class Index extends Component {
       <div className="full-height-min has-text-centered pl20 pl20">
         <AddTodo className="mt20 mb20" />
         <p>
-          {t('todo:show.label')}:{' '}
+          {t('todo:show.label')}
+:
+          {' '}
           <FilterLink filter="SHOW_ALL">{t('todo:show.all')}</FilterLink>
-          {', '}
+          ,
           <FilterLink filter="SHOW_ACTIVE">{t('todo:show.active')}</FilterLink>
-          {', '}
+          ,
           <FilterLink filter="SHOW_COMPLETED">
             {t('todo:show.completed')}
           </FilterLink>

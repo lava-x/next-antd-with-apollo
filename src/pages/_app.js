@@ -39,5 +39,5 @@ class MyApp extends App {
 
 export default compose(
   appWithTranslation,
-  withApolloClient
+  withApolloClient,
 )(MyApp);

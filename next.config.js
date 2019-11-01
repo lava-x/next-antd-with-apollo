@@ -7,11 +7,11 @@ const path = require('path');
 
 // The variables to override ant design default variable
 const themeVariables = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './styles/variables.less'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, './styles/variables.less'), 'utf8'),
 );
 
 const nextConfig = {
-  exportPathMap: function() {
+  exportPathMap() {
     return {
       '/': { page: '/' },
       '/todo': { page: '/todo' },
@@ -22,14 +22,14 @@ const nextConfig = {
     if (isServer) {
       const antStyles = /antd\/.*?\/style.*?/;
       const origExternals = [...config.externals];
+      // eslint-disable-next-line
       config.externals = [
         (context, request, callback) => {
           if (request.match(antStyles)) return callback();
           if (typeof origExternals[0] === 'function') {
-            origExternals[0](context, request, callback);
-          } else {
-            callback();
+            return origExternals[0](context, request, callback);
           }
+          return callback();
         },
         ...(typeof origExternals[0] === 'function' ? [] : origExternals),
       ];
@@ -56,5 +56,5 @@ module.exports = withPlugins(
       },
     ],
   ],
-  nextConfig
+  nextConfig,
 );

@@ -20,5 +20,5 @@ const withVisibilityFilter = graphql(SET_TODO_FILTER, {
 
 export default compose(
   withVisibilityFilter,
-  withActiveState
+  withActiveState,
 )(Link);

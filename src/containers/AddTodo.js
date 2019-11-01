@@ -33,7 +33,7 @@ const AddTodo = ({ mutate, ...rest }) => {
             className="input is-medium"
             type="text"
             placeholder={t(
-              `${defaultI18nNamespaceForThisComponent}:input.placeholder`
+              `${defaultI18nNamespaceForThisComponent}:input.placeholder`,
             )}
           />
         </div>
