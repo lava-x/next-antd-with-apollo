@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
+import { Link } from 'i18next';
 import ActiveLink from 'components/ActiveLink';
 import styles from './styles';
 import LogoDark from 'assets/Logo.svg';

@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { flowRight as compose } from 'lodash';
 import Layout from 'components/Layout';
 import withApolloClient from 'config/withApolloClient';
-import { appWithTranslation } from 'i18n';
+import { appWithTranslation } from 'i18next';
 import 'styles/styles.less';
 
 Router.onRouteChangeStart = () => NProgress.start();

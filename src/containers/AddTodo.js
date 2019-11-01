@@ -1,9 +1,15 @@
 import React from 'react';
 import { graphql } from '@apollo/react-hoc';
+import { useTranslation } from 'i18next';
 import { mutations } from 'graphql';
 
+const defaultI18nNamespaceForThisComponent = 'todo';
 const { ADD_TODO } = mutations.Todos;
 const AddTodo = ({ mutate, ...rest }) => {
+  //
+  // useTranslation() in component level.
+  //
+  const { t } = useTranslation(defaultI18nNamespaceForThisComponent);
   let input;
 
   return (
@@ -26,12 +32,14 @@ const AddTodo = ({ mutate, ...rest }) => {
             }}
             className="input is-medium"
             type="text"
-            placeholder="What to do?"
+            placeholder={t(
+              `${defaultI18nNamespaceForThisComponent}:input.placeholder`
+            )}
           />
         </div>
         <div className="control ">
           <button type="submit" className="button is-primary is-medium">
-            Add
+            {t(`${defaultI18nNamespaceForThisComponent}:show.add`)}
           </button>
         </div>
       </div>

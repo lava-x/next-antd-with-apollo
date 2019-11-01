@@ -1,0 +1,12 @@
+{
+  "input": {
+    "placeholder": "What to do?"
+  },
+  "show": {
+    "label": "Show",
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "add": "Add"
+  }
+}

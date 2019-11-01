@@ -1,10 +1,10 @@
 {
-  "name": "next-bulma-with-apollo",
+  "name": "next-antd-with-apollo",
   "version": "1.0.0",
-  "description": "NextJs with Bulma CSS framework and GraphQL",
+  "description": "NextJs with Ant Design framework and GraphQL",
   "license": "MIT",
   "scripts": {
-    "dev": "next",
+    "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "export": "next export",

@@ -30,7 +30,7 @@
           "screens": "./screens",
           "styles": "./styles",
           "assets": "./static/assets",
-          "i18n": "./i18n"
+          "i18next": "./i18n"
         }
       }
     ],
