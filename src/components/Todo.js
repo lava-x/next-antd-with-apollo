@@ -1,9 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
 
-const Todo = ({ onClick, completed, text, id }) => (
+const Todo = ({
+  onClick, completed, text, id,
+}) => (
   <div className="control">
-    <a onClick={onClick}>
+    <button type="button" onClick={onClick}>
       <div className="tags has-addons">
         <span className="tag is-dark">{id}</span>
         <span
@@ -15,7 +17,7 @@ const Todo = ({ onClick, completed, text, id }) => (
           {text}
         </span>
       </div>
-    </a>
+    </button>
   </div>
 );
 

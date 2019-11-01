@@ -24,12 +24,13 @@ function createApolloClient(initialState = {}) {
     connectToDevTools: typeof window !== 'undefined',
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors)
-          graphQLErrors.map(({ message, locations, path }) =>
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-          );
+        if (graphQLErrors) {
+          // eslint-disable-next-line
+          graphQLErrors.map(({ message, locations, path }) => console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          ));
+        }
+        // eslint-disable-next-line
         if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
       new HttpLink({
@@ -53,7 +54,7 @@ function createApolloClient(initialState = {}) {
  * Creates or reuses apollo client in the browser.
  * @param  {Object} initialState
  */
-export function initApolloClient(initialState) {
+export default function initApolloClient(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {

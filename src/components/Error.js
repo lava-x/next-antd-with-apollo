@@ -1,3 +1,5 @@
+import React from 'react';
+
 export default ({ message }) => (
   <article className="message is-danger is-large">
     <div className="message-header">

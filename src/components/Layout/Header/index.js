@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 // import Link from 'next/link';
 import { Link } from 'i18next';
 import ActiveLink from 'components/ActiveLink';
-import styles from './styles';
 import LogoDark from 'assets/Logo.svg';
+import styles from './styles';
 
 class Header extends Component {
   render() {
     return (
-      <React.Fragment>
+      <>
         <nav className="navbar">
           <div className="container">
             <div className="navbar-brand">
               <Link href="/">
-                <a className="navbar-item ">
+                <a className="navbar-item">
                   <img
                     src={LogoDark}
                     alt="LavaX Technologies Sdn Bhd"
@@ -28,7 +28,7 @@ class Header extends Component {
                 <span />
               </div>
             </div>
-            <div className={'navbar-menu'}>
+            <div className="navbar-menu">
               <div className="navbar-end">
                 <ActiveLink
                   href="/todo"
@@ -56,7 +56,7 @@ class Header extends Component {
           </div>
         </nav>
         <style jsx>{styles}</style>
-      </React.Fragment>
+      </>
     );
   }
 }

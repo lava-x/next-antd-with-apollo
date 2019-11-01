@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { queries } from '../';
+import { queries } from '..';
 
 let nextTodoId = 0;
 const todos = {
@@ -12,11 +12,12 @@ const todos = {
         const { GET_TODOS } = queries.Todos;
         const previous = cache.readQuery({ query: GET_TODOS });
         const newTodo = {
-          id: nextTodoId++,
+          id: nextTodoId,
           text,
           completed: false,
           __typename: 'TodoItem',
         };
+        nextTodoId += 1;
         const data = {
           todos: previous.todos.concat([newTodo]),
         };

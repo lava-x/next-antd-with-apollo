@@ -1,9 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { initApolloClient } from './initApollo';
-
-let apolloClient = null;
+import initApolloClient from './initApollo';
 
 /**
  * Creates and provides the apolloContext
@@ -25,10 +23,10 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
 
   // Set the correct displayName in development
   if (process.env.NODE_ENV !== 'production') {
-    const displayName =
-      PageComponent.displayName || PageComponent.name || 'Component';
+    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
 
     if (displayName === 'App') {
+      // eslint-disable-next-line
       console.warn('This withApollo HOC only works with PageComponents.');
     }
 
@@ -41,7 +39,8 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
 
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
-      const apolloClient = (ctx.apolloClient = initApolloClient());
+      const apolloClient = initApolloClient();
+      ctx.apolloClient = apolloClient;
 
       // Run wrapped getInitialProps methods
       let pageProps = {};
@@ -68,12 +67,13 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
                   ...pageProps,
                   apolloClient,
                 }}
-              />
+              />,
             );
           } catch (error) {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/performance/server-side-rendering/#using-getdatafromtree
+            // eslint-disable-next-line
             console.error('Error while running `getDataFromTree`', error);
           }
 

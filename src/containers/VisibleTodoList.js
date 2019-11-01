@@ -15,7 +15,7 @@ const getVisibleTodos = (todos, filter) => {
     case 'SHOW_ACTIVE':
       return todos.filter((t) => !t.completed);
     default:
-      throw new Error('Unknown filter: ' + filter);
+      throw new Error(`Unknown filter: ${filter}`);
   }
 };
 
@@ -29,14 +29,12 @@ const withTodos = graphql(GET_TODOS, {
 });
 
 const withToggleTodo = graphql(TOGGLE_TODO, {
-  props: ({ mutate }) => {
-    return {
-      onTodoClick: (id) => mutate({ variables: { id } }),
-    };
-  },
+  props: ({ mutate }) => ({
+    onTodoClick: (id) => mutate({ variables: { id } }),
+  }),
 });
 
 export default compose(
   withTodos,
-  withToggleTodo
+  withToggleTodo,
 )(TodoList);

@@ -1,19 +1,19 @@
 import React from 'react';
-import { i18n, Link, withTranslation, Trans } from 'i18next';
+import {
+  i18n, Link, withTranslation, Trans,
+} from 'i18next';
 
 // this will load the 'translate.json' from
 // /static/locales/[lang]/translate.json
 // where [lang] could be 'en', 'de', and so on.
 const defaultI18nNamespaceForThisPage = 'translate';
 
-const Test = ({ t, router }) => (
+const Test = ({ t }) => (
   <div className="full-height-min pl20 pl20">
     <div className="buttons has-addons">
       <button
         type="button"
-        onClick={() =>
-          i18n.changeLanguage(i18n.language === 'en' ? 'de' : 'en')
-        }
+        onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'de' : 'en')}
       >
         {t('change-locale')}
       </button>
@@ -23,12 +23,16 @@ const Test = ({ t, router }) => (
     <p>{t('translate:sample_test')}</p>
 
     <div>
-      <button>{t('translate:sample_button')}</button>
+      <button type="button">{t('translate:sample_button')}</button>
     </div>
     <p>{t('common:pureComponent')}</p>
     <p>{t('common:extendedComponent')}</p>
     <Trans i18nKey="common:transComponent">
-      Alternatively, you can use <code>Trans</code> component.
+      Alternatively, you can use
+      {' '}
+      <code>Trans</code>
+      {' '}
+component.
     </Trans>
     <br />
     <Link href="/">

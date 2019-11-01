@@ -47,5 +47,5 @@ export default compose(
     //   const { data } = results;
     //   return data;
     // },
-  })
+  }),
 )(Component);

@@ -2,11 +2,14 @@ import React, { PureComponent } from 'react';
 import Moment from 'react-moment';
 import { Card, Button } from 'antd';
 import PostVoter from 'components/PostVoter';
+
 const { Meta } = Card;
 
 export default class Posts extends PureComponent {
   render() {
-    const { posts, meta, loading, onActionVote } = this.props;
+    const {
+      posts, meta, loading, onActionVote,
+    } = this.props;
     const areMorePosts = posts.length < meta.count;
 
     return (
@@ -25,11 +28,11 @@ export default class Posts extends PureComponent {
               >
                 <Meta
                   title={post.title}
-                  description={
+                  description={(
                     <Moment format="do,MMM YYYY hh:mm:ss A">
                       {post.createdAt}
                     </Moment>
-                  }
+                  )}
                 />
               </Card>
             </div>
@@ -42,7 +45,8 @@ export default class Posts extends PureComponent {
             </Button>
           </div>
         )}
-        <style jsx>{`
+        <style jsx>
+          {`
           .wrapper {
             width: 100%;
             position: relative;
@@ -80,7 +84,8 @@ export default class Posts extends PureComponent {
               }
             }
           }
-        `}</style>
+        `}
+        </style>
       </div>
     );
   }

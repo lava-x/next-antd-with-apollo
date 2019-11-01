@@ -1,26 +1,24 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Icon } from 'antd';
 
 const PostUpvoter = (props) => {
-  const onActionVote = (upvote) => {
-    return () => {
-      const { id, votes, onActionVote } = props;
-      if (!!onActionVote) {
-        onActionVote(id, upvote ? votes + 1 : votes - 1);
-      }
-    };
+  const onAction = (upvote) => () => {
+    const { id, votes, onActionVote } = props;
+    if (onActionVote) {
+      onActionVote(id, upvote ? votes + 1 : votes - 1);
+    }
   };
   return (
-    <Fragment>
-      <Button onClick={onActionVote(false)}>
+    <>
+      <Button onClick={onAction(false)}>
         <Icon type="down" />
       </Button>
       <strong className="pl10 pr10">{props.votes}</strong>
-      <Button onClick={onActionVote(true)}>
+      <Button onClick={onAction(true)}>
         <Icon type="up" />
       </Button>
-    </Fragment>
+    </>
   );
 };
 
