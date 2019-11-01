@@ -13,4 +13,8 @@ class Index extends Component {
   }
 }
 
+Index.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(Index);
