@@ -1,4 +1,3 @@
-// import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import fetch from 'isomorphic-unfetch';
 import { resolvers, typeDefs } from 'graphql';
 import { ApolloClient } from 'apollo-client';
@@ -14,22 +13,26 @@ if (!process.browser) {
   global.fetch = fetch;
 }
 
-function create(initialState) {
-  const cache = new InMemoryCache().restore(initialState || {});
+/**
+ * Creates and configures the ApolloClient
+ * @param  {Object} [initialState={}]
+ */
+function createApolloClient(initialState = {}) {
+  const cache = new InMemoryCache().restore(initialState);
   const client = new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser,
+    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
+    connectToDevTools: typeof window !== 'undefined',
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors)
-          graphQLErrors.map(({ message, locations, path }) =>
-            console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-            )
-          );
+        if (graphQLErrors) {
+          // eslint-disable-next-line
+          graphQLErrors.map(({ message, locations, path }) => console.log(
+            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+          ));
+        }
+        // eslint-disable-next-line
         if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
-      // withClientState({ ...resolvers, typeDefs }),
       new HttpLink({
         uri: 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn', // Server URL (must be absolute)
         credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
@@ -46,16 +49,21 @@ function create(initialState) {
   return client;
 }
 
-export default function initApollo(initialState) {
+/**
+ * Always creates a new apollo client on the server
+ * Creates or reuses apollo client in the browser.
+ * @param  {Object} initialState
+ */
+export default function initApolloClient(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (!process.browser) {
-    return create(initialState);
+  if (typeof window === 'undefined') {
+    return createApolloClient(initialState);
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState);
+    apolloClient = createApolloClient(initialState);
   }
 
   return apolloClient;

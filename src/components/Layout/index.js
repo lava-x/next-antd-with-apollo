@@ -1,14 +1,20 @@
-import React, { Component } from 'react';
 import _ from 'lodash';
+import React, { Component } from 'react';
+import { withRouter } from 'next/router';
 import Header from 'components/Layout/Header';
 import Footer from 'components/Layout/Footer';
 
 class Layout extends Component {
-  state = {
-    width: 0,
-    height: 0,
-    mode: 'desktop',
-  };
+  constructor(props) {
+    super(props);
+
+    /* eslint-disable react/no-unused-state */
+    this.state = {
+      width: 0,
+      height: 0,
+      mode: 'desktop',
+    };
+  }
 
   updateDimensions = () => {
     this.setState({
@@ -16,6 +22,7 @@ class Layout extends Component {
       height: window.innerHeight,
       mode: window.innerWidth > 1087 ? 'desktop' : 'mobile',
     });
+    /* eslint-disable react/no-unused-state */
   };
 
   componentDidMount = () => {
@@ -28,14 +35,15 @@ class Layout extends Component {
   };
 
   render() {
+    const { children } = this.props;
     return (
-      <React.Fragment>
+      <>
         <Header />
-        {this.props.children}
+        {children}
         <Footer />
-      </React.Fragment>
+      </>
     );
   }
 }
 
-export default Layout;
+export default withRouter(Layout);

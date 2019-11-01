@@ -10,7 +10,9 @@ export default class Footer extends PureComponent {
             <div className="columns">
               <div className="column">
                 <h2 className="title is-2">Lava X</h2>
-                <h4 className="subtitle is-4">NextJs with Bulma Starter</h4>
+                <h4 className="subtitle is-4">
+                  NextJs with Ant Design Starter
+                </h4>
               </div>
             </div>
           </div>

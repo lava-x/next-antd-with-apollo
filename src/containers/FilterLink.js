@@ -1,4 +1,5 @@
-import { compose, graphql } from 'react-apollo';
+import { graphql } from '@apollo/react-hoc';
+import { flowRight as compose } from 'lodash';
 import { queries, mutations } from 'graphql';
 import Link from 'components/Link';
 
@@ -19,5 +20,5 @@ const withVisibilityFilter = graphql(SET_TODO_FILTER, {
 
 export default compose(
   withVisibilityFilter,
-  withActiveState
+  withActiveState,
 )(Link);

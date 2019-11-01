@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import Posts from 'containers/Posts';
-import { Button } from 'antd';
 import styles from './styles';
 
 export default class Home extends PureComponent {

@@ -1,5 +1,6 @@
-import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+import { graphql } from '@apollo/react-hoc';
+import { flowRight as compose } from 'lodash';
 import Component from './component';
 
 const GET_ALL_POST = gql`
@@ -46,5 +47,5 @@ export default compose(
     //   const { data } = results;
     //   return data;
     // },
-  })
+  }),
 )(Component);
