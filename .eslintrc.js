@@ -2,34 +2,39 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
-  extends: ['airbnb'],
+  extends: [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react",
+  ],
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly"
   },
-  parser: 'babel-eslint',
+  parser: "babel-eslint",
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: "module"
   },
-  plugins: ['react'],
+  plugins: ["prettier", "react"],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'react/destructuring-assignment': [0],
-    'react/prop-types': [0],
-    'react/jsx-props-no-spreading': [0],
-    'react/prefer-stateless-function': [0],
-    'jsx-a11y/anchor-is-valid': [0],
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
+    "react/destructuring-assignment": [0],
+    "react/prop-types": [0],
+    "react/jsx-props-no-spreading": [0],
+    "react/prefer-stateless-function": [0],
+    "jsx-a11y/anchor-is-valid": [0]
   },
   settings: {
-    'import/resolver': {
-      'babel-module': {},
+    "import/resolver": {
+      "babel-module": {}
     },
-    'import/core-modules': ['styled-jsx/css'],
-  },
+    "import/core-modules": ["styled-jsx/css"]
+  }
 };

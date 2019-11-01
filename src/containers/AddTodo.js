@@ -1,9 +1,9 @@
-import React from 'react';
-import { graphql } from '@apollo/react-hoc';
-import { useTranslation } from 'i18next';
-import { mutations } from 'graphql';
+import React from "react";
+import { graphql } from "@apollo/react-hoc";
+import { useTranslation } from "i18next";
+import { mutations } from "graphql";
 
-const defaultI18nNamespaceForThisComponent = 'todo';
+const defaultI18nNamespaceForThisComponent = "todo";
 const { ADD_TODO } = mutations.Todos;
 const AddTodo = ({ mutate, ...rest }) => {
   //
@@ -15,25 +15,25 @@ const AddTodo = ({ mutate, ...rest }) => {
   return (
     <form
       {...rest}
-      onSubmit={(e) => {
+      onSubmit={e => {
         e.preventDefault();
         if (!input.value.trim()) {
           return;
         }
         mutate({ variables: { text: input.value } });
-        input.value = '';
+        input.value = "";
       }}
     >
       <div className="field has-addons is-grouped is-grouped-centered">
         <div className="control">
           <input
-            ref={(node) => {
+            ref={node => {
               input = node;
             }}
             className="input is-medium"
             type="text"
             placeholder={t(
-              `${defaultI18nNamespaceForThisComponent}:input.placeholder`,
+              `${defaultI18nNamespaceForThisComponent}:input.placeholder`
             )}
           />
         </div>

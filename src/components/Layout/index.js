@@ -1,8 +1,8 @@
-import _ from 'lodash';
-import React, { Component } from 'react';
-import { withRouter } from 'next/router';
-import Header from 'components/Layout/Header';
-import Footer from 'components/Layout/Footer';
+import _ from "lodash";
+import React, { Component } from "react";
+import { withRouter } from "next/router";
+import Header from "components/Layout/Header";
+import Footer from "components/Layout/Footer";
 
 class Layout extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class Layout extends Component {
     this.state = {
       width: 0,
       height: 0,
-      mode: 'desktop',
+      mode: "desktop"
     };
   }
 
@@ -20,18 +20,18 @@ class Layout extends Component {
     this.setState({
       width: window.innerWidth,
       height: window.innerHeight,
-      mode: window.innerWidth > 1087 ? 'desktop' : 'mobile',
+      mode: window.innerWidth > 1087 ? "desktop" : "mobile"
     });
     /* eslint-disable react/no-unused-state */
   };
 
   componentDidMount = () => {
     this.updateDimensions();
-    window.addEventListener('resize', _.throttle(this.updateDimensions, 500));
+    window.addEventListener("resize", _.throttle(this.updateDimensions, 500));
   };
 
   componentWillUnmount = () => {
-    window.removeEventListener('resize', this.updateDimensions);
+    window.removeEventListener("resize", this.updateDimensions);
   };
 
   render() {

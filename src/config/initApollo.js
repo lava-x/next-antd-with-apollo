@@ -1,10 +1,10 @@
-import fetch from 'isomorphic-unfetch';
-import { resolvers, typeDefs } from 'graphql';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
+import fetch from "isomorphic-unfetch";
+import { resolvers, typeDefs } from "graphql";
+import { ApolloClient } from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
+import { ApolloLink } from "apollo-link";
 
 let apolloClient = null;
 
@@ -20,30 +20,32 @@ if (!process.browser) {
 function createApolloClient(initialState = {}) {
   const cache = new InMemoryCache().restore(initialState);
   const client = new ApolloClient({
-    ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
-    connectToDevTools: typeof window !== 'undefined',
+    ssrMode: typeof window === "undefined", // Disables forceFetch on the server (so queries are only run once)
+    connectToDevTools: typeof window !== "undefined",
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
-          // eslint-disable-next-line
-          graphQLErrors.map(({ message, locations, path }) => console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-          ));
+          graphQLErrors.map(({ message, locations, path }) =>
+            // eslint-disable-next-line
+            console.log(
+              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            )
+          );
         }
         // eslint-disable-next-line
         if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
       new HttpLink({
-        uri: 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn', // Server URL (must be absolute)
-        credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-      }),
+        uri: "https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn", // Server URL (must be absolute)
+        credentials: "same-origin" // Additional fetch() options like `credentials` or `headers`
+      })
     ]),
     typeDefs,
     resolvers: resolvers.resolvers,
-    cache,
+    cache
   });
   cache.writeData({
-    data: resolvers.defaults,
+    data: resolvers.defaults
   });
 
   return client;
@@ -57,7 +59,7 @@ function createApolloClient(initialState = {}) {
 export default function initApolloClient(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return createApolloClient(initialState);
   }
 

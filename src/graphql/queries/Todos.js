@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const GET_TODOS = gql`
   query GetTodos {
@@ -19,5 +19,5 @@ export const GET_FILTER = gql`
 
 export default {
   GET_TODOS,
-  GET_FILTER,
+  GET_FILTER
 };

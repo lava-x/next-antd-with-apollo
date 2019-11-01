@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import styles from './styles';
+import React, { PureComponent } from "react";
+import styles from "./styles";
 
 export default class Footer extends PureComponent {
   render() {

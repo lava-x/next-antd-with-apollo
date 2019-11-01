@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'next/router';
-import classnames from 'classnames';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "next/router";
+import classnames from "classnames";
 // import Link from 'next/link';
-import { Link } from 'i18next';
+import { Link } from "i18next";
 
 class ActiveLink extends PureComponent {
   render() {
@@ -21,7 +21,7 @@ class ActiveLink extends PureComponent {
     } = this.props;
     const newClassNames = classnames(
       { active: href === router.pathname },
-      className || {},
+      className || {}
     );
     let hrefProps = alt ? { alt } : {};
     hrefProps = onClick ? { onClick, ...hrefProps } : hrefProps;
@@ -42,16 +42,16 @@ ActiveLink.propTypes = {
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
-    PropTypes.array,
+    PropTypes.array
   ]),
-  title: PropTypes.string,
+  title: PropTypes.string
 };
 
 ActiveLink.defaultProps = {
   href: null,
   prefetch: null,
   className: null,
-  title: null,
+  title: null
 };
 
 export default withRouter(ActiveLink);

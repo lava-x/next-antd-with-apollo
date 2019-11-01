@@ -1,7 +1,7 @@
-import gql from 'graphql-tag';
-import { graphql } from '@apollo/react-hoc';
-import { flowRight as compose } from 'lodash';
-import Component from './component';
+import gql from "graphql-tag";
+import { graphql } from "@apollo/react-hoc";
+import { flowRight as compose } from "lodash";
+import Component from "./component";
 
 const GET_ALL_POST = gql`
   query allPosts($first: Int!, $skip: Int!) {
@@ -37,9 +37,9 @@ export default compose(
     options: {
       variables: {
         skip: 0,
-        first: 10,
-      },
-    },
+        first: 10
+      }
+    }
   }),
   graphql(UPVOTE_POST, {
     // props: (results) => {
@@ -47,5 +47,5 @@ export default compose(
     //   const { data } = results;
     //   return data;
     // },
-  }),
+  })
 )(Component);

@@ -1,7 +1,7 @@
-import React from 'react';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
-import initApolloClient from './initApollo';
+import React from "react";
+import Head from "next/head";
+import { ApolloProvider } from "@apollo/react-hooks";
+import initApolloClient from "./initApollo";
 
 /**
  * Creates and provides the apolloContext
@@ -22,10 +22,11 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
   };
 
   // Set the correct displayName in development
-  if (process.env.NODE_ENV !== 'production') {
-    const displayName = PageComponent.displayName || PageComponent.name || 'Component';
+  if (process.env.NODE_ENV !== "production") {
+    const displayName =
+      PageComponent.displayName || PageComponent.name || "Component";
 
-    if (displayName === 'App') {
+    if (displayName === "App") {
       // eslint-disable-next-line
       console.warn('This withApollo HOC only works with PageComponents.');
     }
@@ -34,7 +35,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
   }
 
   if (ssr || PageComponent.getInitialProps) {
-    WithApollo.getInitialProps = async (ctx) => {
+    WithApollo.getInitialProps = async ctx => {
       const { AppTree } = ctx;
 
       // Initialize ApolloClient, add it to the ctx object so
@@ -49,7 +50,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
       }
 
       // Only on the server:
-      if (typeof window === 'undefined') {
+      if (typeof window === "undefined") {
         // When redirecting, the response is finished.
         // No point in continuing to render
         if (ctx.res && ctx.res.finished) {
@@ -60,14 +61,14 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
         if (ssr) {
           try {
             // Run all GraphQL queries
-            const { getDataFromTree } = await import('@apollo/react-ssr');
+            const { getDataFromTree } = await import("@apollo/react-ssr");
             await getDataFromTree(
               <AppTree
                 pageProps={{
                   ...pageProps,
-                  apolloClient,
+                  apolloClient
                 }}
-              />,
+              />
             );
           } catch (error) {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
@@ -88,7 +89,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
 
       return {
         ...pageProps,
-        apolloState,
+        apolloState
       };
     };
   }

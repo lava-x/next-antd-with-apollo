@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import Link from 'next/link';
-import { Link } from 'i18next';
-import ActiveLink from 'components/ActiveLink';
-import LogoDark from 'assets/Logo.svg';
-import styles from './styles';
+import { Link } from "i18next";
+import ActiveLink from "components/ActiveLink";
+import LogoDark from "assets/Logo.svg";
+import styles from "./styles";
 
 class Header extends Component {
   render() {
