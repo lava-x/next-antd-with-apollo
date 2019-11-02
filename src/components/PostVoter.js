@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Button, Icon } from 'antd';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button, Icon } from "antd";
 
-const PostUpvoter = (props) => {
-  const onAction = (upvote) => () => {
+const PostUpvoter = props => {
+  const onAction = upvote => () => {
     const { id, votes, onActionVote } = props;
     if (onActionVote) {
       onActionVote(id, upvote ? votes + 1 : votes - 1);
@@ -23,7 +23,7 @@ const PostUpvoter = (props) => {
 };
 
 PostUpvoter.propTypes = {
-  onActionVote: PropTypes.func.isRequired,
+  onActionVote: PropTypes.func.isRequired
 };
 
 export default PostUpvoter;

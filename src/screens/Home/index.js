@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import Posts from 'containers/Posts';
-import styles from './styles';
+import React, { PureComponent } from "react";
+import Posts from "containers/Posts";
+import styles from "./styles";
 
 export default class Home extends PureComponent {
   render() {

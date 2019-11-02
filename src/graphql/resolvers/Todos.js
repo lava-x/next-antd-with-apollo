@@ -1,10 +1,10 @@
-import gql from 'graphql-tag';
-import { queries } from '..';
+import gql from "graphql-tag";
+import { queries } from "..";
 
 let nextTodoId = 0;
 const todos = {
   defaults: {
-    todos: [],
+    todos: []
   },
   resolvers: {
     Mutation: {
@@ -15,11 +15,11 @@ const todos = {
           id: nextTodoId,
           text,
           completed: false,
-          __typename: 'TodoItem',
+          __typename: "TodoItem"
         };
         nextTodoId += 1;
         const data = {
-          todos: previous.todos.concat([newTodo]),
+          todos: previous.todos.concat([newTodo])
         };
         cache.writeData({ data });
         return newTodo;
@@ -35,9 +35,9 @@ const todos = {
         const data = { ...todo, completed: !todo.completed };
         cache.writeData({ id, data });
         return null;
-      },
-    },
-  },
+      }
+    }
+  }
 };
 
 export default todos;

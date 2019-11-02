@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const TOGGLE_TODO = gql`
   mutation ToggleTodo($id: Int!) {
@@ -23,5 +23,5 @@ export const SET_TODO_FILTER = gql`
 export default {
   ADD_TODO,
   TOGGLE_TODO,
-  SET_TODO_FILTER,
+  SET_TODO_FILTER
 };

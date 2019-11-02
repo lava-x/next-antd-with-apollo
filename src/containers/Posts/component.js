@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import ErrorMessage from 'components/Error';
-import Posts from 'components/Posts';
+import React, { PureComponent } from "react";
+import ErrorMessage from "components/Error";
+import Posts from "components/Posts";
 
 export default class PostsContainer extends PureComponent {
   // ======================= EVENT
   onActionLoadMore = (allPosts, fetchMore) => () => {
     fetchMore({
       variables: {
-        skip: allPosts.length,
+        skip: allPosts.length
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         if (!fetchMoreResult) {
@@ -15,9 +15,9 @@ export default class PostsContainer extends PureComponent {
         }
         return {
           ...previousResult, // Append the new posts results to the old one
-          allPosts: [...previousResult.allPosts, ...fetchMoreResult.allPosts],
+          allPosts: [...previousResult.allPosts, ...fetchMoreResult.allPosts]
         };
-      },
+      }
     });
   };
 
@@ -25,22 +25,20 @@ export default class PostsContainer extends PureComponent {
     this.props.mutate({
       variables: { id, votes },
       optimisticResponse: {
-        __typename: 'Mutation',
+        __typename: "Mutation",
         updatePost: {
-          __typename: 'Post',
+          __typename: "Post",
           id,
-          votes,
-        },
-      },
+          votes
+        }
+      }
     });
   };
 
   // ======================= RENDER
   render() {
     const {
-      data: {
-        loading, error, allPosts, _allPostsMeta, fetchMore,
-      },
+      data: { loading, error, allPosts, _allPostsMeta, fetchMore }
     } = this.props;
     if (error) return <ErrorMessage message="Error loading posts." />;
     if (loading) return <div>Loading</div>;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Link = ({ active, children, onClick }) => {
   if (active) {
@@ -9,7 +9,7 @@ const Link = ({ active, children, onClick }) => {
     // eslint-disable-next-line
     <a
       href="#"
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         onClick();
       }}
