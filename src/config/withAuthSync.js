@@ -74,7 +74,7 @@ export default WrappedComponent =>
           if (callback) {
             callback();
           } else {
-            redirect({}, "/", "force-reload");
+            redirect({}, "/");
           }
           return null;
         });
@@ -92,7 +92,7 @@ export default WrappedComponent =>
         if (callback) {
           callback(isAtRestrictPath);
         } else {
-          redirect({}, SIGN_IN_PATH);
+          redirect({}, SIGN_IN_PATH, "force-reload");
         }
         this.setUser(null);
       });
