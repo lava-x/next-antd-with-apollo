@@ -9,7 +9,7 @@ export default (context, target, method = "replace") => {
     context.res.end();
   } else {
     if (method === "hard-reload") {
-      window.location.href = "/";
+      window.location.href = target;
       return;
     }
 
