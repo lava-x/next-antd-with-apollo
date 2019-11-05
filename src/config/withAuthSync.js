@@ -74,7 +74,7 @@ export default WrappedComponent =>
           if (callback) {
             callback();
           } else {
-            redirect({}, "/");
+            redirect({}, "/", "force-reload");
           }
           return null;
         });
