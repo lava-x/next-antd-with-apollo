@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { withRouter } from "next/router";
 import Header from "components/Layout/Header";
 import Footer from "components/Layout/Footer";
+import RouteIndicator from "components/RouteIndicator";
 
 class Layout extends Component {
   constructor(props) {
@@ -54,6 +55,7 @@ class Layout extends Component {
       <>
         <Header {...props} />
         {childrenWithProps}
+        <RouteIndicator />
         <Footer {...props} />
       </>
     );
