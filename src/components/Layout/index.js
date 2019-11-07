@@ -36,13 +36,27 @@ class Layout extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { width, height, mode } = this.state;
+    const { children, ...restProps } = this.props;
+    const props = {
+      width,
+      height,
+      mode,
+      ...restProps
+    };
+    const childrenWithProps = React.Children.map(children, child => {
+      if (!child || typeof child === "boolean") {
+        return null;
+      }
+      return React.cloneElement(child, props);
+    });
+
     return (
       <>
-        <Header />
-        {children}
+        <Header {...props} />
+        {childrenWithProps}
         <RouteIndicator />
-        <Footer />
+        <Footer {...props} />
       </>
     );
   }

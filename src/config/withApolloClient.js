@@ -1,7 +1,17 @@
 import React from "react";
 import Head from "next/head";
+import { parseCookies } from "nookies";
 import { ApolloProvider } from "@apollo/react-hooks";
-import initApolloClient from "./initApollo";
+import initApolloClient from "./initApolloClient";
+
+/**
+ * Get the user token from cookie
+ * @param {Object} req
+ */
+const getAuthToken = ctx => {
+  const cookies = parseCookies(ctx);
+  return cookies.token;
+};
 
 /**
  * Creates and provides the apolloContext
@@ -13,7 +23,11 @@ import initApolloClient from "./initApollo";
  */
 export default function withApollo(PageComponent, { ssr = true } = {}) {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
-    const client = apolloClient || initApolloClient(apolloState);
+    const client =
+      apolloClient ||
+      initApolloClient(apolloState, {
+        getToken: () => getAuthToken()
+      });
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps} />
@@ -36,11 +50,14 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
 
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async ctx => {
-      const { AppTree } = ctx;
+      const { AppTree, ctx: context } = ctx;
 
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
-      const apolloClient = initApolloClient();
+      const apolloClient = initApolloClient(
+        {},
+        { getToken: () => getAuthToken(context) }
+      );
       ctx.apolloClient = apolloClient;
 
       // Run wrapped getInitialProps methods
