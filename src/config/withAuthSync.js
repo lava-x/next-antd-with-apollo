@@ -3,7 +3,8 @@ import _ from "lodash";
 import { setCookie, destroyCookie } from "nookies";
 import checkLoggedIn from "config/checkLoggedIn";
 import redirect from "config/redirect";
-import initialPropsAuth, { SIGN_IN_PATH } from "config/initialPropsAuth";
+import { SIGN_IN_PATH } from "config/constant";
+import initialPropsAuth from "config/initialPropsAuth";
 
 const tokenValidityInDays = 30; // 30 days
 const getDisplayName = Component =>
