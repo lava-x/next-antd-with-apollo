@@ -1,15 +1,13 @@
 import _ from "lodash";
 import redirect from "config/redirect";
-
-export const SIGN_IN_PATH = "/signin";
-
-// path accessible by public
-// by default, this works as a whitelist.
-// everything else that is not listed here will not be accessible by the public
-export const publicPaths = ["/", "/faq", "/terms"];
-
-// restricted path that can't be accessed if user has signed in
-export const restrictPathsAfterAuth = [SIGN_IN_PATH, "/signup"];
+import {
+  SIGN_IN_PATH,
+  ONBOARDING_PATH,
+  DEFAULT_PATH_AFTER_SIGN_IN,
+  PATHS_ONLY_ALLOWED_BEFORE_AUTH,
+  PATHS_NOT_ALLOWED_AFTER_AUTH,
+  PATHS_FOR_ADMIN_ONLY
+} from "config/constant";
 
 export const checkIsPathMatchesAny = (paths, checkPaths, partial = false) => {
   const results = _.filter(paths, e => {
@@ -26,7 +24,10 @@ export const checkIsPathMatchesAny = (paths, checkPaths, partial = false) => {
 };
 
 export const restrictPathBeforeAuth = path => {
-  const paths = _.concat(publicPaths, restrictPathsAfterAuth);
+  const paths = _.concat(
+    PATHS_ONLY_ALLOWED_BEFORE_AUTH,
+    PATHS_NOT_ALLOWED_AFTER_AUTH
+  );
   return !checkIsPathMatchesAny(paths, path);
 };
 
@@ -35,7 +36,6 @@ export default (context, authUser) => {
   const navigatingToPaths = [asPath, pathname];
 
   const config = {};
-  const defaultPathIfAlreadySignIn = "/account";
 
   if (pathname === "/_error") {
     // eslint-disable-next-line
@@ -47,33 +47,34 @@ export default (context, authUser) => {
     // you can do things like checking user roles
     // and see if they are trying to navigate somewhere else
     const isNotAdmin = true; // authUser.roles;
-    const pathsForAdmin = ["/admin"];
-    if (isNotAdmin && checkIsPathMatchesAny(navigatingToPaths, pathsForAdmin)) {
-      redirect(context, defaultPathIfAlreadySignIn);
+    if (
+      isNotAdmin &&
+      checkIsPathMatchesAny(navigatingToPaths, PATHS_FOR_ADMIN_ONLY)
+    ) {
+      redirect(context, DEFAULT_PATH_AFTER_SIGN_IN);
       return config;
     }
 
     // you can also do things to check on user onboarding states
     // and ensure they have to go through the onboarding before doing anything else
     const requireOnboarding = true; // authUser.setupIsRequired OR authUser.onboardingStatus
-    const pathForOnboarding = "/onboard";
     if (
       requireOnboarding &&
-      checkIsPathMatchesAny(navigatingToPaths, [pathForOnboarding])
+      checkIsPathMatchesAny(navigatingToPaths, [ONBOARDING_PATH])
     ) {
-      redirect(context, pathForOnboarding);
+      redirect(context, ONBOARDING_PATH);
       return config;
     }
 
     // always redirect user goes to account whenever user try to access path that is forbidden or restricted
     const isRestrictPathForAuth = checkIsPathMatchesAny(
-      restrictPathsAfterAuth,
+      PATHS_NOT_ALLOWED_AFTER_AUTH,
       navigatingToPaths
     );
     if (isRestrictPathForAuth) {
       // eslint-disable-next-line
       console.log("===== isAtRestrictPath ");
-      redirect(context, defaultPathIfAlreadySignIn);
+      redirect(context, DEFAULT_PATH_AFTER_SIGN_IN);
     }
     return config;
   }

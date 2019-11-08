@@ -6,6 +6,7 @@ import { HttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
+import { GRAPHQL_ENDPOINT } from "config/constant";
 
 let apolloClient = null;
 
@@ -48,7 +49,7 @@ function createApolloClient(initialState = {}, { getToken }) {
       }),
       authLink,
       new HttpLink({
-        uri: "https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn", // Server URL (must be absolute)
+        uri: GRAPHQL_ENDPOINT, // Server URL (must be absolute)
         credentials: "same-origin" // Additional fetch() options like `credentials` or `headers`
       })
     ]),
