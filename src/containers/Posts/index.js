@@ -1,34 +1,10 @@
-import gql from "graphql-tag";
+import { mutations, queries } from "graphql";
 import { graphql } from "@apollo/react-hoc";
 import { flowRight as compose } from "lodash";
 import Component from "./component";
 
-const GET_ALL_POST = gql`
-  query allPosts($first: Int!, $skip: Int!) {
-    allPosts(orderBy: createdAt_DESC, first: $first, skip: $skip) {
-      id
-      title
-      votes
-      url
-      createdAt
-    }
-    _allPostsMeta {
-      count
-    }
-  }
-`;
-
-const UPVOTE_POST = gql`
-  mutation updatePost($id: ID!, $votes: Int) {
-    updatePost(id: $id, votes: $votes) {
-      id
-      __typename
-      votes
-    }
-  }
-`;
 export default compose(
-  graphql(GET_ALL_POST, {
+  graphql(queries.Post.GET_ALL_POST, {
     // props: (results) => {
     //   console.log('mapResultsToProps ----->', results);
     //   const { data } = results;
@@ -41,7 +17,7 @@ export default compose(
       }
     }
   }),
-  graphql(UPVOTE_POST, {
+  graphql(mutations.Post.UPVOTE_POST, {
     // props: (results) => {
     //   console.log('mapResultsToProps ----->', results);
     //   const { data } = results;
