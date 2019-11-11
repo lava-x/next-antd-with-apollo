@@ -8,7 +8,7 @@ export default (context, target, method = "replace") => {
     context.res.writeHead(303, { Location: target });
     context.res.end();
   } else {
-    if (method === "force-reload") {
+    if (typeof window !== "undefined" && method === "force-reload") {
       window.location.href = target;
       return;
     }
