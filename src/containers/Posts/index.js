@@ -3,6 +3,9 @@ import { graphql } from "@apollo/react-hoc";
 import { flowRight as compose } from "lodash";
 import Component from "./component";
 
+export default Component;
+
+/**
 export default compose(
   graphql(queries.Post.GET_ALL_POST, {
     // props: (results) => {
@@ -25,3 +28,4 @@ export default compose(
     // },
   })
 )(Component);
+ */
