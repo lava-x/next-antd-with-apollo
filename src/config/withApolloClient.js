@@ -63,7 +63,10 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
       // Run wrapped getInitialProps methods
       let pageProps = {};
       if (PageComponent.getInitialProps) {
-        pageProps = await PageComponent.getInitialProps(ctx);
+        pageProps = await PageComponent.getInitialProps({
+          ...ctx,
+          apolloClient
+        });
       }
 
       // Only on the server:
