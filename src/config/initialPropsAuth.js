@@ -2,11 +2,11 @@ import _ from "lodash";
 import redirect from "config/redirect";
 import {
   SIGN_IN_PATH,
-  ONBOARDING_PATH,
   DEFAULT_PATH_AFTER_SIGN_IN,
   PATHS_ONLY_ALLOWED_BEFORE_AUTH,
   PATHS_NOT_ALLOWED_AFTER_AUTH,
-  PATHS_FOR_ADMIN_ONLY
+  PATHS_FOR_ADMIN_ONLY,
+  NO_LAYOUT_PATH
 } from "config/constant";
 
 export const checkIsPathMatchesAny = (paths, checkPaths, partial = false) => {
@@ -35,7 +35,12 @@ export default (context, authUser) => {
   const { asPath, pathname } = context;
   const navigatingToPaths = [asPath, pathname];
 
-  const config = {};
+  const shouldHideLayout = checkIsPathMatchesAny(
+    NO_LAYOUT_PATH,
+    navigatingToPaths
+  );
+
+  const config = { shouldHideLayout };
 
   if (pathname === "/_error") {
     // eslint-disable-next-line
@@ -46,7 +51,7 @@ export default (context, authUser) => {
   if (authUser) {
     // you can do things like checking user roles
     // and see if they are trying to navigate somewhere else
-    const isNotAdmin = true; // authUser.roles;
+    const isNotAdmin = !authUser.isAdmin;
     if (
       isNotAdmin &&
       checkIsPathMatchesAny(navigatingToPaths, PATHS_FOR_ADMIN_ONLY)
@@ -57,14 +62,14 @@ export default (context, authUser) => {
 
     // you can also do things to check on user onboarding states
     // and ensure they have to go through the onboarding before doing anything else
-    const requireOnboarding = true; // authUser.setupIsRequired OR authUser.onboardingStatus
-    if (
-      requireOnboarding &&
-      checkIsPathMatchesAny(navigatingToPaths, [ONBOARDING_PATH])
-    ) {
-      redirect(context, ONBOARDING_PATH);
-      return config;
-    }
+    // const requireOnboarding = true; // authUser.setupIsRequired OR authUser.onboardingStatus
+    // if (
+    //   requireOnboarding &&
+    //   checkIsPathMatchesAny(navigatingToPaths, [ONBOARDING_PATH])
+    // ) {
+    //   redirect(context, ONBOARDING_PATH);
+    //   return config;
+    // }
 
     // always redirect user goes to account whenever user try to access path that is forbidden or restricted
     const isRestrictPathForAuth = checkIsPathMatchesAny(

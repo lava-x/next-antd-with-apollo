@@ -3,7 +3,7 @@ import _ from "lodash";
 import { setCookie, destroyCookie } from "nookies";
 import checkLoggedIn from "config/checkLoggedIn";
 import redirect from "config/redirect";
-import { SIGN_IN_PATH } from "config/constant";
+import { SIGN_IN_PATH, DEFAULT_PATH_AFTER_SIGN_IN } from "config/constant";
 import initialPropsAuth from "config/initialPropsAuth";
 
 const getDisplayName = Component =>
@@ -16,7 +16,7 @@ const tokenValidityInDays = 30; // 30 days
 const eraseCookieFromAllPaths = name => {
   // This function will attempt to remove a cookie from all paths.
   // eslint-disable-next-line
-  const pathBits = location.pathname.split('/');
+  const pathBits = location.pathname.split("/");
   let pathCurrent = " path=";
   // do a simple pathless delete first.
   document.cookie = `${name}=; expires=Thu, 01-Jan-1970 00:00:01 GMT;`;
@@ -66,6 +66,9 @@ export default WrappedComponent =>
     constructor(props) {
       super(props);
       this.syncAuth = this.syncAuth.bind(this);
+      this.state = {
+        authUser: props.authUser
+      };
     }
 
     // ======================= LIFECYCLE
@@ -89,6 +92,24 @@ export default WrappedComponent =>
       window.removeEventListener("storage", this.syncAuth);
     };
 
+    // sign out auth user
+    signOut = callback => {
+      const { apolloClient, router } = this.props;
+      clearAuthToken();
+      apolloClient.clearStore().then(() => {
+        apolloClient.resetStore();
+        const isAtRestrictPath = !_.includes(
+          DEFAULT_PATH_AFTER_SIGN_IN,
+          router.pathname
+        );
+        if (callback) {
+          callback(isAtRestrictPath);
+        } else {
+          redirect({}, SIGN_IN_PATH, "force-reload");
+        }
+      });
+    };
+
     // ======================= EVENTS
     syncAuth(event) {
       const { apolloClient } = this.props;
@@ -102,6 +123,8 @@ export default WrappedComponent =>
 
     // ======================= VIEW
     render() {
-      return <WrappedComponent {...this.props} />;
+      return (
+        <WrappedComponent {...this.props} signOutAuthUser={this.signOut} />
+      );
     }
   };
