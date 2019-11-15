@@ -1,9 +1,9 @@
 import _ from "lodash";
 import React, { Component } from "react";
 import { withRouter } from "next/router";
-import Header from "components/Layout/Header";
-import Footer from "components/Layout/Footer";
+import Sidebar from "components/Layout/Sidebar";
 import RouteIndicator from "components/RouteIndicator";
+import Spinner from "components/Spinner";
 
 class Layout extends Component {
   constructor(props) {
@@ -13,12 +13,14 @@ class Layout extends Component {
     this.state = {
       width: 0,
       height: 0,
-      mode: "desktop"
+      mode: "desktop",
+      loading: true
     };
   }
 
   updateDimensions = () => {
     this.setState({
+      loading: false,
       width: window.innerWidth,
       height: window.innerHeight,
       mode: window.innerWidth > 1087 ? "desktop" : "mobile"
@@ -36,7 +38,7 @@ class Layout extends Component {
   };
 
   render() {
-    const { width, height, mode } = this.state;
+    const { width, height, mode, loading } = this.state;
     const { children, ...restProps } = this.props;
     const props = {
       width,
@@ -44,6 +46,7 @@ class Layout extends Component {
       mode,
       ...restProps
     };
+    if (loading) return <Spinner fullscreen />;
     const childrenWithProps = React.Children.map(children, child => {
       if (!child || typeof child === "boolean") {
         return null;
@@ -53,10 +56,8 @@ class Layout extends Component {
 
     return (
       <>
-        <Header {...props} />
-        {childrenWithProps}
+        <Sidebar {...props}>{childrenWithProps}</Sidebar>
         <RouteIndicator />
-        <Footer {...props} />
       </>
     );
   }
