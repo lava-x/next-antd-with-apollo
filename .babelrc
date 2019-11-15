@@ -27,7 +27,9 @@
           "containers": "./src/containers",
           "graphql": "./src/graphql",
           "locales": "./src/locales",
+          "helpers": "./src/helpers",
           "screens": "./src/screens",
+          "constants": "./src/constants",
           "styles": "./styles",
           "assets": "./public/static/assets",
           "i18next": "./i18n"
