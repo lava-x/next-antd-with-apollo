@@ -2,7 +2,6 @@ import css from "styled-jsx/css";
 
 export default css`
   .sign-in-screen {
-    background-image: url("https://storage.googleapis.com/teleport_social/assets/twin-tower.svg");
     background-size: cover;
     background-repeat: no-repeat;
     overflow: hidden;

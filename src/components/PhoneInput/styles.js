@@ -4,7 +4,6 @@ export default css.global`
   .flag {
     width: 16px;
     height: 11px;
-    background: url("https://storage.googleapis.com/teleport_social/assets/flags.png");
   }
   .react-tel-input {
     font-family: "Roboto", sans-serif;
