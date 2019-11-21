@@ -4,11 +4,7 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: [
-    "airbnb",
-    "plugin:prettier/recommended",
-    "prettier/react",
-  ],
+  extends: ["airbnb", "plugin:prettier/recommended", "prettier/react"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly"
@@ -29,6 +25,7 @@ module.exports = {
     "react/prop-types": [0],
     "react/jsx-props-no-spreading": [0],
     "react/prefer-stateless-function": [0],
+    "react/require-default-props": [0],
     "jsx-a11y/anchor-is-valid": [0]
   },
   settings: {

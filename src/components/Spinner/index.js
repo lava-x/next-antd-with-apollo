@@ -29,13 +29,7 @@ Spinner.propTypes = {
   size: PropTypes.oneOf(["small", "default", "large"]),
   spinning: PropTypes.bool,
   tip: PropTypes.string,
-  fullscreen: PropTypes.bool,
-  styles: PropTypes.object,
-  className: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.array
-  ])
+  fullscreen: PropTypes.bool
 };
 
 Spinner.defaultProps = {
