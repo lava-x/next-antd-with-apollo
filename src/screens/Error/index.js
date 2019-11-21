@@ -18,17 +18,6 @@ class ErrorScreen extends PureComponent {
     }
   };
 
-  render() {
-    return (
-      <>
-        <div className="error-screen full-height-min flex-vertical-center">
-          {this.renderResult()}
-        </div>
-        <style jsx>{styles}</style>
-      </>
-    );
-  }
-
   renderResult() {
     const { statusCode } = this.props;
     if (!statusCode) {
@@ -62,6 +51,17 @@ class ErrorScreen extends PureComponent {
       />
     );
   }
+
+  render() {
+    return (
+      <>
+        <div className="error-screen full-height-min flex-vertical-center">
+          {this.renderResult()}
+        </div>
+        <style jsx>{styles}</style>
+      </>
+    );
+  }
 }
 
-export { ErrorScreen };
+export default ErrorScreen;
