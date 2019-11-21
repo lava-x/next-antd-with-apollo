@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
-import { fragmentUserBasic } from "graphql/fragments/User";
+import { fragmentUser } from "graphql/fragments/User";
 
 export const GET_PROFILE = gql`
   query profile {
     profile {
-      ...fragmentUserBasic
+      ...fragmentUser
     }
   }
-  ${fragmentUserBasic}
+  ${fragmentUser}
 `;
 
 export default {
