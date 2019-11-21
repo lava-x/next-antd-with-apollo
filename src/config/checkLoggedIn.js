@@ -6,7 +6,8 @@ export default apolloClient =>
       query: queries.User.GET_PROFILE
     })
     .then(({ data }) => {
-      return { authUser: data.profile };
+      const profile = data.profile && data.profile.id ? data.profile : null;
+      return { authUser: profile };
     })
     .catch(() => {
       // Fail gracefully

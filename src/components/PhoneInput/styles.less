@@ -1,0 +1,42 @@
+@import '../../../styles/styles.less';
+@import '../../../styles/phone-input.less';
+
+.react-tel-input {
+  input[type='tel'] {
+    &::placeholder {
+      color: #ffffff;
+      font-family: Avenir;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 18px;
+      line-height: 21px;
+      opacity: 0.6;
+    }
+  }
+
+  .flag-dropdown,
+  .selected-flag,
+  .flag-dropdown.open-dropdown,
+  .flag-dropdown.open-dropdown .selected-flag {
+    border: none;
+    border-radius: 2px 0 0 2px;
+    background-color: rgba(110, 111, 115, 0.1);
+  }
+
+  // hover
+  .flag-dropdown:hover .selected-flag {
+    &:hover {
+      background-color: rgba(110, 111, 115, 0.1);
+    }
+  }
+
+  // arrow
+  .selected-flag {
+    .arrow {
+      border-top: 4px solid #ffffff;
+    }
+    .arrow.up {
+      border-bottom: 4px solid #ffffff;
+    }
+  }
+}

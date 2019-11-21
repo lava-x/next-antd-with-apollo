@@ -30,7 +30,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
       });
     return (
       <ApolloProvider client={client}>
-        <PageComponent {...pageProps} />
+        <PageComponent {...pageProps} apolloClient={client} />
       </ApolloProvider>
     );
   };
@@ -42,7 +42,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
 
     if (displayName === "App") {
       // eslint-disable-next-line
-      console.warn('This withApollo HOC only works with PageComponents.');
+      console.warn("This withApollo HOC only works with PageComponents.");
     }
 
     WithApollo.displayName = `withApollo(${displayName})`;
@@ -95,7 +95,7 @@ export default function withApollo(PageComponent, { ssr = true } = {}) {
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/performance/server-side-rendering/#using-getdatafromtree
             // eslint-disable-next-line
-            console.error('Error while running `getDataFromTree`', error);
+            console.error("Error while running `getDataFromTree`", error);
           }
 
           // getDataFromTree does not call componentWillUnmount

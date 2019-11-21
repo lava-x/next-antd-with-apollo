@@ -1,6 +1,7 @@
 import App from "next/app";
 import Head from "next/head";
 import React from "react";
+import { Modal } from "antd";
 import { flowRight as compose } from "lodash";
 import Layout from "components/Layout";
 import withAuthSync from "config/withAuthSync";
@@ -17,14 +18,42 @@ class MyApp extends App {
     return { pageProps };
   }
 
+  onActionSignOut = () => {
+    // eslint-disable-next-line no-underscore-dangle
+    const _this = this;
+    Modal.confirm({
+      title: "Are you want to signout?",
+      icon: "logout",
+      centered: true,
+      okButtonProps: {
+        shape: "round",
+        type: "primary"
+      },
+      cancelButtonProps: {
+        shape: "round"
+      },
+      onOk() {
+        window.localStorage.setItem("signout", Date.now());
+        if (_this.props.signOutAuthUser) {
+          _this.props.signOutAuthUser();
+        }
+      }
+    });
+  };
+
   render() {
-    const { Component, pageProps, authUser } = this.props;
+    const { Component, pageProps, authUser, router, config } = this.props;
     return (
       <>
         <Head>
-          <title>Lava X | NextJS with AntDesign Starter</title>
+          <title>Lava X | Admin Panel</title>
         </Head>
-        <Layout authUser={authUser}>
+        <Layout
+          config={config}
+          router={router}
+          authUser={authUser}
+          onActionSignOut={this.onActionSignOut}
+        >
           <Component {...pageProps} />
         </Layout>
       </>

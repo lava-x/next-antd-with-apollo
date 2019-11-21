@@ -1,20 +1,13 @@
 import gql from "graphql-tag";
+import { fragmentUser } from "graphql/fragments/User";
 
 export const GET_PROFILE = gql`
   query profile {
     profile {
-      id
-      avatar
-      firstName
-      lastName
-      username
-      email
-      roles
-      verified
-      createdAt
-      updatedAt
+      ...fragmentUser
     }
   }
+  ${fragmentUser}
 `;
 
 export default {

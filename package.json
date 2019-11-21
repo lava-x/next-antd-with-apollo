@@ -26,6 +26,7 @@
     "apollo-link-http": "^1.5.16",
     "classnames": "^2.2.6",
     "express": "^4.17.1",
+    "file-saver": "^2.0.2",
     "graphql": "^14.3.1",
     "graphql-tag": "^2.10.1",
     "isomorphic-unfetch": "^3.0.0",
@@ -44,7 +45,10 @@
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-moment": "^0.9.6",
-    "styled-jsx-plugin-less": "^0.0.1-alpha.1"
+    "react-phone-input-2": "^2.9.4",
+    "styled-jsx-plugin-less": "^0.0.1-alpha.1",
+    "xlsx": "^0.15.1",
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
