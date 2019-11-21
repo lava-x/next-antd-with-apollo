@@ -8,18 +8,8 @@ import styles from "./styles";
 class Spinner extends PureComponent {
   // =================== VIEW
   render() {
-    const {
-      size,
-      spinning,
-      indicator,
-      tip,
-      fullscreen,
-      className
-    } = this.props;
-
-    const indicatorProps = indicator ? { indicator } : {};
+    const { size, spinning, tip, fullscreen, className } = this.props;
     const newProps = { size, spinning, tip };
-    ({ ...indicatorProps });
     return (
       <div
         className={classnames(
@@ -38,7 +28,6 @@ class Spinner extends PureComponent {
 Spinner.propTypes = {
   size: PropTypes.oneOf(["small", "default", "large"]),
   spinning: PropTypes.bool,
-  indicator: PropTypes.node,
   tip: PropTypes.string,
   fullscreen: PropTypes.bool,
   styles: PropTypes.object,

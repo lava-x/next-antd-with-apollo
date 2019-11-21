@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-import { fragmentUserBasic } from "graphql/fragments/User";
+import { fragmentUser } from "graphql/fragments/User";
 
 export const SIGNIN = gql`
   mutation signin($countryCode: Int!, $phoneNumber: Int!, $password: String!) {
@@ -11,11 +11,11 @@ export const SIGNIN = gql`
     ) {
       token
       user {
-        ...fragmentUserBasic
+        ...fragmentUser
       }
     }
   }
-  ${fragmentUserBasic}
+  ${fragmentUser}
 `;
 
 export default {

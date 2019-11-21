@@ -1,4 +1,4 @@
-import css from 'styled-jsx/css';
+import css from "styled-jsx/css";
 
 export default css.global`
   .dialog-wrapper {
@@ -6,7 +6,7 @@ export default css.global`
     white-space: nowrap;
 
     &:before {
-      content: '';
+      content: "";
       display: inline-block;
       height: 100%;
       vertical-align: middle;

@@ -1,24 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Modal } from 'antd';
-import _ from 'lodash';
-import styles from './styles';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { Modal } from "antd";
+import _ from "lodash";
+import styles from "./styles";
 
 class Dialog extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    options: PropTypes.shape({
-      onDialogPop: PropTypes.func,
-      onDialogDismiss: PropTypes.func,
-      onDialogCancel: PropTypes.func,
-    }),
-  };
-
   constructor(props) {
     super(props);
     this.state = {
-      visibility: false,
+      visibility: false
     };
   }
 
@@ -37,32 +28,32 @@ class Dialog extends Component {
 
   // ------------------------------------ EVENTS
   onDialogPop = () => {
-    const options = this.props.options;
+    const { options } = this.props;
     if (options && options.onDialogPop) {
       options.onDialogPop();
     }
     this.setState({
-      visibility: true,
+      visibility: true
     });
   };
 
   onDialogDismiss = () => {
-    const options = this.props.options;
+    const { options } = this.props;
     if (options && options.onDialogDismiss) {
       options.onDialogDismiss();
     }
     this.setState({
-      visibility: false,
+      visibility: false
     });
   };
 
-  onDialogCancel = (e) => {
-    const options = this.props.options;
+  onDialogCancel = () => {
+    const { options } = this.props;
     if (options && options.onDialogCancel) {
       options.onDialogCancel();
     }
     this.setState({
-      visibility: false,
+      visibility: false
     });
   };
 
@@ -76,11 +67,11 @@ class Dialog extends Component {
       maskClosable,
       ...restProps
     } = this.props;
-    const newProps = Object.assign({}, restProps);
+    const newProps = { ...restProps };
     delete newProps.options;
     delete newProps.onRef;
     return (
-      <Fragment>
+      <>
         <Modal
           {...newProps}
           footer={null}
@@ -94,14 +85,26 @@ class Dialog extends Component {
               ? true
               : maskClosable
           }
-          wrapClassName={classNames('dialog-wrapper', className)}
+          wrapClassName={classNames("dialog-wrapper", className)}
         >
           {children}
         </Modal>
         <style jsx>{styles}</style>
-      </Fragment>
+      </>
     );
   }
 }
+
+Dialog.propTypes = {
+  options: PropTypes.shape({
+    onDialogPop: PropTypes.func,
+    onDialogDismiss: PropTypes.func,
+    onDialogCancel: PropTypes.func
+  })
+};
+
+Dialog.defaultProps = {
+  options: {}
+};
 
 export default Dialog;
