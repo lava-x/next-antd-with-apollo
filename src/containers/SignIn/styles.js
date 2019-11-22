@@ -68,6 +68,16 @@ export default css`
             border-color: #ff0c6d;
           }
         }
+
+        :global(.ant-input-password) {
+          :global(.ant-input-suffix) {
+            max-width: 18px;
+          }
+          :global(.ant-input-password-icon) {
+            color: #ffffff;
+            font-size: 18px;
+          }
+        }
       }
     }
   }

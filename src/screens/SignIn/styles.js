@@ -24,4 +24,10 @@ export default css`
       width: 100%;
     }
   }
+
+  @media only screen and (min-width: 1024px) {
+    .sign-in-screen {
+      padding: 0;
+    }
+  }
 `;
