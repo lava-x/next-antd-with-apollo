@@ -1,11 +1,11 @@
 import React, { PureComponent } from "react";
 import { Form, Input, Button } from "antd";
 
-import PhoneInputComponent from "components/PhoneInput";
 import Spinner from "components/Spinner";
 
-import { validatePhoneInputLength } from "helpers/validations";
 import styles from "./styles";
+
+const { Password } = Input;
 
 class SignIn extends PureComponent {
   constructor() {
@@ -35,16 +35,6 @@ class SignIn extends PureComponent {
     });
   };
 
-  handleOnChange = (value, countryCode, phoneNumber) => {
-    this.props.form.setFieldsValue({
-      contactNo: value
-    });
-    this.setState({
-      countryCode,
-      phoneNumber
-    });
-  };
-
   render() {
     const { form } = this.props;
     const { getFieldDecorator } = form;
@@ -60,19 +50,14 @@ class SignIn extends PureComponent {
             <h1>Sign In</h1>
             <div className="mt20">
               <Form.Item>
-                {getFieldDecorator("contactNo", {
+                {getFieldDecorator("email", {
                   rules: [
                     {
                       required: true,
-                      message: "Phone number is required."
-                    },
-                    {
-                      validator: validatePhoneInputLength(this.props.form)
+                      message: "Email is required."
                     }
                   ]
-                })(
-                  <PhoneInputComponent handleOnChange={this.handleOnChange} />
-                )}
+                })(<Input size="large" placeholder="Email" />)}
               </Form.Item>
             </div>
             <Form.Item>
@@ -84,7 +69,7 @@ class SignIn extends PureComponent {
                   },
                   { validator: this.validatePassword }
                 ]
-              })(<Input size="large" type="password" placeholder="Password" />)}
+              })(<Password size="large" placeholder="Password" />)}
             </Form.Item>
             <Button
               type="primary"
